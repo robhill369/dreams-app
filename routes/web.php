@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\HomePostController;
 use App\Http\Controllers\SessionsController;
 
 /*
@@ -16,8 +17,9 @@ use App\Http\Controllers\SessionsController;
 |
 */
 
+Route::get('/', [HomePostController::class, 'index'])->middleware('guest');
 
-Route::get('/', [PostController::class, 'index'])->middleware('guest');
+Route::get('/posts', [PostController::class, 'index'])->middleware('guest');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('guest');
 
 Route::get('register', [AccountController::class, 'create'])->middleware('guest');
