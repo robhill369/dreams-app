@@ -20,22 +20,21 @@
     <!--Totally optional :) -->
 
     <style>
-
         html {
             scroll-behavior: smooth;
         }
-        
-        .clamp{
+
+        .clamp {
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        
+
         .clamp.one-line {
             -webkit-line-clamp: 1;
         }
-        
-        </style>
+
+    </style>
 
 </head>
 
@@ -44,13 +43,13 @@
     <section>
         <nav class="w-full bg-yellow-50 shadow-lg flex flex-wrap fixed z-40 top-0 h-20">
             <div class="container justify-between relative flex items-center my-auto mx-auto w-full">
-                <div >
+                <div>
                     <a href="/" class="flex items-center text-5xl font-bold text-gray-800">
-                        Remi. 
+                        Remi.
                     </a>
                 </div>
-                
-            {{-- <div class="relative flex lg:inline-flex border border-gray-800 rounded-full ml-40 pl-3 py-1 pr-32 shadow-lg">
+
+                {{-- <div class="relative flex lg:inline-flex border border-gray-800 rounded-full ml-40 pl-3 py-1 pr-32 shadow-lg">
                 <form method="GET" action="/">
                         <input type="text"  
                             name="search" 
@@ -59,26 +58,28 @@
                             value="{{ request('search') }}">
                 </form>
             </div> --}}
-            
-            <div class="text-gray-800 font-medium ">
-                <ul>  
-                    <div class="grid grid-cols-3 divide-x divide-grey-800 items-center justify-items-center">   
-                        <li>
-                            <a class="hover:text-pink-700" href="#">Dreams</a>
-                        </li>
-                        <li>
-                            <a class=" ml-6 hover:text-pink-700" href="/register">Register</a>
-                        </li>
-                        <li>
-                            <button class="transition duration-150 ease-in-out bg-white bg-yellow-50 border border-gray-800 hover:bg-pink-700 hover:border-yellow-50 hover:text-white rounded-full px-6 ml-9 shadow-lg py-2 font-medium">  
-                                <a href="/login">Log In</a>
-                            </button>
-                        </li>
-                    </div>
-                </ul>
-            </div>
+
+                <div class="text-gray-800 font-medium ">
+                    <ul>
+                        <div class="grid grid-cols-3 divide-x divide-grey-800 items-center justify-items-center">
+                            <li>
+                                <a class="hover:text-pink-700" href="/posts">Dreams</a>
+                            </li>
+                            <li>
+                                <a class=" ml-6 hover:text-pink-700" href="/register">Register</a>
+                            </li>
+                            <li>
+                                <a href="/login"
+                                    class="transition duration-150 ease-in-out bg-white bg-yellow-50 border border-gray-800 hover:bg-pink-700 hover:border-yellow-50 hover:text-white rounded-full px-6 ml-9 shadow-lg py-3 font-medium">
+                                    Log In
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
         </nav>
         {{ $slot }}
     </section>
 </body>
+
 </html>

@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts');
     }
 
     /**
@@ -43,9 +43,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
+    // need to pass in an $id
     {
-        //
+        return view('post');
     }
 
     /**

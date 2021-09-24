@@ -1,3 +1,3 @@
-<x-static-page>
+<x-layout.static-page>
     
-</x-static-page>
+</x-layout.static-page>

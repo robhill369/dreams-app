@@ -6,6 +6,7 @@
         border: #FFFBEB;
     }
 </style>
+
 <div class="ml-6 mt-6 flex justify-evenly">
     {{-- Funny --}}
     <div class="mr-6">
@@ -31,17 +32,17 @@
     {{-- Bizarre --}}
     <div class="mr-6">
 
-        <label class="items-center cursor-pointer">
+        <label class=" items-center cursor-pointer">
             <!-- toggle -->
             <div class="relative">
                 <!-- input -->
-                <input type="checkbox" id="toggleB" class="sr-only" name="bizarre" value="bizarre">
+                <input type="checkbox" id="bizarre" class="sr-only" name="bizzare" value="bizarre">
                 <!-- line -->
                 <div class="block peer hidden">
                 </div>
                 <!-- dot -->
                 <div name="onclick"
-                    class="dot shadow-lg relative bg-yellow-50 border border-gray-800 items-center flex px-5 h-12 rounded-full transition peer-checked:bg-indigo-700 text-center">
+                    class="dot shadow-lg relative bg-yellow-50 border border-gray-800 items-center flex px-5 h-12 rounded-full transition peer-checked:#667eea text-center">
                     <label for="bizarre"
                         class="items-center whitespace-nowrap text-gray-800 text-sm tracking-wider font-bold">Bizarre</label>
                 </div>
@@ -92,5 +93,4 @@
         </label>
 
     </div>
-
 </div>

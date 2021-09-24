@@ -26,8 +26,8 @@
                         <li class="mt-1">Process emotions more easily.</li>
                 </ul>
             <x-primary-button class="mt-4 float-right">
-                <x-slot name='href'>'/register'</x-slot>
-               Start your journey
+                <x-slot name='href'>/register</x-slot>
+               Start Your Journal
             </x-primary-button>
         </div>
         </div>

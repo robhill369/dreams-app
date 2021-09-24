@@ -20,7 +20,7 @@ use App\Http\Controllers\SessionsController;
 Route::get('/', [HomePostController::class, 'index'])->middleware('guest');
 
 Route::get('/posts', [PostController::class, 'index'])->middleware('guest');
-Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('guest');
+Route::get('posts/post', [PostController::class, 'show'])->middleware('guest');
 
 Route::get('register', [AccountController::class, 'create'])->middleware('guest');
 Route::post('register', [AccountController::class, 'store'])->middleware('guest');
