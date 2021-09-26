@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomePostController;
 use App\Http\Controllers\SessionsController;
 
@@ -22,12 +22,14 @@ Route::get('/', [HomePostController::class, 'index'])->middleware('guest');
 Route::get('/posts', [PostController::class, 'index'])->middleware('guest');
 Route::get('posts/post', [PostController::class, 'show'])->middleware('guest');
 
-Route::get('register', [AccountController::class, 'create'])->middleware('guest');
-Route::post('register', [AccountController::class, 'store'])->middleware('guest');
-Route::get('{user:username}/myaccount', [AccountController::class, 'show'])->middleware('auth');
-Route::get('{user:username}/myaccount/edit', [AccountController::class, 'edit'])->middleware('auth');
-Route::patch('{user:username}/myaccount', [AccountController::class, 'update'])->middleware('auth');
-Route::delete('{user:username}/myaccount', [AccountController::class, 'destroy'])->middleware('auth');
+// add {user:username} to the abover URL. Means that post slugs don't have to be unique
+
+Route::get('register', [UserController::class, 'create'])->middleware('guest');
+Route::post('register', [UserController::class, 'store'])->middleware('guest');
+Route::get('{user:username}/myaccount', [UserController::class, 'show'])->middleware('auth');
+Route::get('{user:username}/myaccount/edit', [UserController::class, 'edit'])->middleware('auth');
+Route::patch('{user:username}/myaccount', [UserController::class, 'update'])->middleware('auth');
+Route::delete('{user:username}/myaccount', [UserController::class, 'destroy'])->middleware('auth');
 
 Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');

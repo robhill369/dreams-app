@@ -17,11 +17,20 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+
+    // Shouldn't need the below as I've defined the unguarded in the app service provider
+    
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +50,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function setPasswordAttribute($password)
+    {
+       $this->attributes['Password'] = bcrypt($password); 
+    }
+
 }
