@@ -7,7 +7,7 @@
                     <div class="lg:flex text-3xl shadow-lg rounded-full text-gray-800 bg-white border border-gray-800 lg:py-3 flex">
                         <div>
                             <input type="text" name="search" placeholder="Search keywords..."
-                                class="pr-20 pl-6 focus:outline-none bg-transparent placeholder-gray-300 py-1 text-gray-800 "
+                                class="focus:ring-0 pl-6 border-none text-2xl bg-transparent placeholder-gray-400 py-1 text-gray-800 "
                                 value="{{ request('search') }}">
                         </div>
                     </div>

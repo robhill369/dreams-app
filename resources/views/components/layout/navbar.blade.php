@@ -59,24 +59,60 @@
                 </form>
             </div> --}}
 
-                <div class="text-gray-800 font-medium ">
-                    <ul>
-                        <div class="grid grid-cols-3 divide-x divide-grey-800 items-center justify-items-center">
-                            <li>
-                                <a class="hover:text-pink-700" href="/posts">Dreams</a>
-                            </li>
-                            <li>
-                                <a class=" ml-6 hover:text-pink-700" href="/register">Register</a>
-                            </li>
-                            <li>
-                                <a href="/login"
-                                    class="transition duration-150 ease-in-out bg-white bg-yellow-50 border border-gray-800 hover:bg-pink-700 hover:border-yellow-50 hover:text-white rounded-full px-6 ml-9 shadow-lg py-3 font-medium">
-                                    Log In
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
-                </div>
+                @auth
+
+                    {{-- <x-dropdown>
+                        <x-slot name="trigger">
+                            <x-dropdown-button> --}}
+                                Welcome, {{ auth()->user()->first_name }}
+                            {{-- </x-dropdown-button>
+                        </x-slot>
+                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Manage Posts
+                        </x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post
+                        </x-dropdown-item>
+                        <x-dropdown-item href="#" x-data="{}"
+                            @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
+
+                        <form id="logout-form" method="POST" action="/logout" class="hidden">
+                            @csrf
+                        </form>
+
+                    </x-dropdown> --}}
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
+
+
+                @else
+                    <div class="text-gray-800 font-medium ">
+                        <ul>
+                            <div class="grid grid-cols-3 divide-x divide-grey-800 items-center justify-items-center">
+                                <li>
+                                    <a class="hover:text-pink-700" href="/posts">Dreams</a>
+                                </li>
+                                <li>
+                                    <a class=" ml-6 hover:text-pink-700" href="/register">Register</a>
+                                </li>
+                                <li>
+                                    <a href="/login"
+                                        class="transition duration-150 ease-in-out bg-white bg-yellow-50 border border-gray-800 hover:bg-pink-700 hover:border-yellow-50 hover:text-white rounded-full px-6 ml-9 shadow-lg py-3 font-medium">
+                                        Log In
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                @endauth
+
+
         </nav>
         {{ $slot }}
     </section>

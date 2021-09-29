@@ -8,7 +8,7 @@
             </h3>
 
             <div class="mt-6">
-                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full mb-20">
+                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full mb-12">
         
                     <form method="POST" action="/newsletter" class="lg:flex text-sm">
                         @csrf
@@ -18,7 +18,7 @@
                                 id="subscribe-email" 
                                 type="email" 
                                 placeholder="Your email address"
-                                class=" lg:bg-transparent lg:py-0 pl-3 focus-within:outline-none pr-10"> 
+                                class="focus:ring-0 border-none text-xl text-gray-800 lg:bg-transparent lg:py-0 pl-1 focus-within:outline-none pr-10"> 
                                     @error('subscribe-email')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                     @enderror
