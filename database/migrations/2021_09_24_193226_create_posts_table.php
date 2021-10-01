@@ -17,14 +17,17 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->string('title');
             $table->text('excerpt');
             $table->text('body');
-            $table->boolean('explicit_content');
+            $table->boolean('explicit_content')->default(1)->nullable();
+            $table->boolean('public')->default(1)->nullable();
             $table->timestamps();
         });
     }
+
+    
 
     /**
      * Reverse the migrations.

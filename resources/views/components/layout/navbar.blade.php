@@ -64,7 +64,32 @@
                     {{-- <x-dropdown>
                         <x-slot name="trigger">
                             <x-dropdown-button> --}}
-                                Welcome, {{ auth()->user()->first_name }}
+                                <div class="text-gray-800 font-medium ">
+                                    <ul>
+                                        <div class="grid grid-cols-3 divide-x divide-grey-800 items-center justify-items-center">
+                                            <li>
+                                                <a class="hover:text-pink-700" href="/posts">Dreams</a>
+                                            </li>
+                                            <li>
+                                                <a class="hover:text-pink-800 cursor-pointer" href="{{route('create-post',Auth::user()->username)}}">Create a post</a>
+                                            </li>
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                            
+                                                    <x-dropdown-link :href="route('logout')"
+                                                            onclick="event.preventDefault();
+                                                                        this.closest('form').submit();">
+                                                        {{ __('Log Out') }}
+                                                    </x-dropdown-link>
+                                                </form>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </div>
+                                
+                                
+                               
                             {{-- </x-dropdown-button>
                         </x-slot>
                         <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Manage Posts
@@ -79,17 +104,6 @@
                         </form>
 
                     </x-dropdown> --}}
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
-                    </form>
-
 
                 @else
                     <div class="text-gray-800 font-medium ">

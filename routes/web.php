@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\HomePostController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,40 +18,40 @@ use App\Http\Controllers\HomePostController;
 |
 */
 
+// Would ideally want to prefix URI auth users with their username, as per auth-only pages
+
 Route::get('/', [HomePostController::class, 'index']);
 
 Route::get('/posts', [PostController::class, 'index']);
         
 Route::get('posts/post', [PostController::class, 'show']);
                 
-// add {user:username} to the above URL. Means that post slugs don't have to be unique
+// add {user:username}/{post:slug} to the above URL. Means that post slugs don't have to be unique
 
 // this directory contains all Controllers required for authentication.
 
 require __DIR__.'/auth.php';
 
-Route::get('{user:username}/myaccount', [UserController::class, 'show'])
-                ->middleware('auth');
-Route::get('{user:username}/myaccount/edit', [UserController::class, 'edit'])
-                ->middleware('auth');
-Route::patch('{user:username}/myaccount', [UserController::class, 'update'])
-                ->middleware('auth');
-Route::delete('{user:username}/myaccount', [UserController::class, 'destroy'])
-                ->middleware('auth');
+Route::group(['prefix' => '/{user}', 'middleware' => ['auth']], function() {
+    
+    Route::get('/myaccount', [UserController::class, 'show']);            
+    Route::get('/myaccount/edit', [UserController::class, 'edit']);              
+    Route::patch('/myaccount', [UserController::class, 'update']);
+    Route::delete('/myaccount', [UserController::class, 'destroy']);
 
+    Route::get('/myposts', [MyPostController::class, 'index'])
+        ->name('myposts.index'); 
+    Route::get('/myposts/{post:slug}', [MyPostController::class, 'show'])
+        ->name('myposts.show');
+    Route::get('/create-post', [MyPostController::class, 'create'])
+        ->name('create-post');
+    Route::post('/myposts/post', [MyPostController::class, 'store'])
+        ->name('store-post');
+    Route::get('/myposts/{post:slug}/edit', [MyPostController::class, 'edit']);
+    Route::patch('/myposts/{post}', [MyPostController::class, 'update']);
+    Route::delete('/myposts/{post}', [MyPostController::class, 'destroy']);
+});
 
-Route::get('admin/posts/{post:slug}', [MyPostController::class, 'show'])
-                ->middleware('auth');
-Route::get('admin/posts/create-post', [MyPostController::class, 'create'])
-                ->middleware('auth');
-Route::post('admin/posts/{post}', [MyPostController::class, 'store'])
-                ->middleware('auth');
-Route::get('admin/posts/{post:slug}/edit', [MyPostController::class, 'edit'])
-                ->middleware('auth');
-Route::patch('admin/posts/{post}', [MyPostController::class, 'update'])
-                ->middleware('auth');
-Route::delete('admin/posts/{post}', [MyPostController::class, 'destroy'])
-                ->middleware('auth');
 
 
 //ROUTES SUPERSEDED BY LARAVEL BREEZE - may consolidate controllers later.
@@ -67,9 +69,9 @@ Route::delete('admin/posts/{post}', [MyPostController::class, 'destroy'])
 // })->middleware('guest')->name('password.request');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {return view('dashboard');})
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 /*
 users - create, destroy, show, store, edit, update, index.
@@ -79,5 +81,3 @@ posts from all/any user(s) - index, show
 posts belonging to me - create, store, edit, update, index, show, destroy.
 categories appended to posts - 
 */
-
-

@@ -25,10 +25,13 @@
                         <li class="mt-1">Learn to dream lucidly.</li>
                         <li class="mt-1">Process emotions more easily.</li>
                 </ul>
-            <x-primary-button class="mt-4 float-right">
-                <x-slot name='href'>/register</x-slot>
-               Start Your Journal
-            </x-primary-button>
+                @guest
+                <x-primary-button class="mt-4 float-right">
+                    <x-slot name='href'>/register</x-slot>
+                        Start Your Journal
+                    </x-primary-button> 
+                @endguest
+                
         </div>
         </div>
     </div>

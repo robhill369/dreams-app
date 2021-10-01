@@ -57,4 +57,9 @@ class User extends Authenticatable
        $this->attributes['Password'] = bcrypt($password); 
     }
 
+    // public function getRouteKeyName()
+    // {
+    //     return 'username';
+    // }
+
 }
