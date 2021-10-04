@@ -5,7 +5,7 @@
                     alt="" width="45" height="45" class="rounded-full">
                     @auth
                         <x-author-button 
-                        :user="$post->author"
+                        :post="$post"
                         class="ml-3"/>
                     @else
                         <a class="ml-3 capitalize">{{ $post->author->username }}</a>
