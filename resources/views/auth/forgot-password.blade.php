@@ -2,11 +2,11 @@
 <x-layout.static-page>
     <x-auth-card>
         <x-slot name="formname">
-            Log In
+            Forgot your Password?
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+            {{ __('No problem! Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>
 
         <!-- Session Status -->

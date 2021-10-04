@@ -5,8 +5,7 @@
         <h2 class="text-center text-3xl font-semibold text-gray-800">{{ $slot }}
         </h2>
         <x-form.input name="title" required />
-        {{-- <x-form.input name="slug" required /> --}}
-        <x-form.textarea name="excerpt" required class="h-54 text-3xl"/>
+        {{-- <x-form.textarea name="excerpt" required class="h-54 text-3xl"/> --}}
         <x-form.textarea name="body" required class="h-96 text-3xl"/>
     
         <div class="grid grid-cols-3 gap-10 items-center">
@@ -25,15 +24,14 @@
         </x-form.field>
 
         <x-form.field>
-            
-            <label>Make this post visible to anyone?</label>
-            <input type="checkbox" name="public" id="public" value="{{ old('public') }}"/>
+            <label>Make this post visible to anyone</label>
+            <input type="checkbox" name="public" id="public" value="1"/>
             <x-form.error name="public"/>
         </x-form.field>
     
         <x-form.field>
-            <label>Does this post contain explicit content?</label>
-            <input type="checkbox" name="explicit_content" id="explicit_content" value="{{ old('explicit_content') }}"/>
+            <label>Contains explicit content</label>
+            <input type="checkbox" name="explicit_content" id="explicit_content" value="1"/>
             <x-form.error name="explicit_content"/>
         </x-form.field>
     </div>

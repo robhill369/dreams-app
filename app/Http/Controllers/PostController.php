@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,7 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts');
+        // return Post::where('user_id', Auth::id())->get;
+        
+        return view('posts',[
+            'posts' => Post::all()]);
     }
 
     /**
@@ -43,10 +48,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Post $post)
     // need to pass in an $id
     {
-        return view('post');
+        return view('post',[
+            'post' => $post
+        ]);
     }
 
     /**

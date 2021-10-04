@@ -19,30 +19,56 @@ class MyPostController extends Controller
     // // Store new post
     // *
 
-    public function store()
-    {
-        $attributes = $this->validatePost(new Post());
-        $attributes['user_id'] = auth()->id();
-        // $attributes['slug'];
+   //  public function store()
+   //  {
+   //      $attributes = $this->validatePost(new Post());
+   //      $attributes['user_id'] = auth()->id();
 
-        Post::create($attributes);
+   //      Post::create($attributes);
 
-        return redirect('/');
-   }
+   //      return redirect('/');
+   // }
 
-protected function validatePost(?Post $post = null): array
+   public function store(Request $request)
    {
-       $post ??= new Post();
+       $this->validate($request, array(
+         'title' => ['required', 'max:255'],
+         'body' => 'required',
+         'category_id' => ['required', Rule::exists('categories', 'id')]
+       ));
 
-       return request()->validate([
-           'title' => 'required',
-        //    'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post)], 
-           'excerpt' => 'required',
-           'body' => 'required',
-           'explicit_content' => 'sometimes',
-           'public'=> 'sometimes',
-           'category_id' => ['required', Rule::exists('categories', 'id')]
-       ]);
+       //create Post
+       $post = new Post;
+       
+       $post->title = Str::title($request->title);
+       $post->excerpt = Str::limit($request->body, 210);
+       $post->slug = $request->slug;
+       $post->category_id = $request->category_id;
+       $post->body = $request->body;
+       $post->explicit_content=$request->explicit_content;
+       $post->public = $request->public;
+       $post->user_id = auth()->user()->id;
+       
+       $post->save();
+       
+       return redirect('/');
    }
+
+
+   // Not required anymore
+
+// protected function validatePost(?Post $post = null): array
+//    {
+//         $post ??= new Post();
+
+//         return request()->validate([
+//            'title' => 'required',
+//          //   'excerpt' => 'required',
+//            'body' => 'required',
+//            'explicit_content' => 'sometimes',
+//            'public'=> 'sometimes',
+//            'category_id' => ['required', Rule::exists('categories', 'id')]
+//         ]);
+//    }
 
 }

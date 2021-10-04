@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -35,21 +36,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $this->validate( $request, array(
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'], 
             'username' => ['required', 'max:255', 'min:3', Rule::unique('users', 'username')],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'min:6', 'max:255', 'confirmed']
-        ]);
+        ));
 
-        $user = User::create($attributes);
+        $user = new User;
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Your account has been created.');
+        return redirect('/');
     }
 
     /**

@@ -19,10 +19,10 @@ class CreatePostsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('slug')->nullable();
             $table->string('title');
-            $table->text('excerpt');
+            $table->string('excerpt')->nullable();
             $table->text('body');
-            $table->boolean('explicit_content')->default(1)->nullable();
-            $table->boolean('public')->default(1)->nullable();
+            $table->boolean('explicit_content')->nullable();
+            $table->boolean('public')->nullable();
             $table->timestamps();
         });
     }

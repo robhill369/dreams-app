@@ -54,12 +54,22 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-       $this->attributes['Password'] = bcrypt($password); 
+       $this->attributes['password'] = bcrypt($password); 
     }
 
     // public function getRouteKeyName()
     // {
     //     return 'username';
     // }
+
+    public function setFirstNameAttribute($firstName)
+  {
+    $this->attributes['first_name'] = ucfirst($firstName);
+  }
+
+  public function setLastNameAttribute($lastName)
+  {
+    $this->attributes['last_name'] = ucfirst($lastName);
+  }
 
 }

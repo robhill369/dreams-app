@@ -18,18 +18,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Would ideally want to prefix URI auth users with their username, as per auth-only pages
+// Would ideally want to prefix URI auth users with their username, as per auth-only pages.
 
 Route::get('/', [HomePostController::class, 'index']);
 
-Route::get('/posts', [PostController::class, 'index']);
-        
-Route::get('posts/post', [PostController::class, 'show']);
-                
-// add {user:username}/{post:slug} to the above URL. Means that post slugs don't have to be unique
+Route::get('/posts', [PostController::class, 'index'])
+        ->name('posts');     
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+
+// Route::get('/{post:username}', [MemberController::class, 'show'])
+//         ->middleware('auth');
 
 // this directory contains all Controllers required for authentication.
-
 require __DIR__.'/auth.php';
 
 Route::group(['prefix' => '/{user}', 'middleware' => ['auth']], function() {

@@ -16,7 +16,7 @@
             <div class="container mx-auto text-right flex flex-col lg:w-1/2 justify-center items-end pt-6 flex-wrap">
                 @auth
                     <h1 class="font-medium text-6xl mb-1 text-yellow-50 inline tracking-wide"> 
-                        Hello <span class="text-pink-700 font-bold capitalize">{{ auth()->user()->first_name }}</span>,
+                        Hello <span class="text-pink-700 font-bold">{{ auth()->user()->first_name }}</span>,
                     </h1>
                     <h1 class="font-medium text-6xl mb-1 text-yellow-50 inline tracking-wide">
                         welcome back.
@@ -26,7 +26,7 @@
                         Discover yourself...
                     </h1>
                     <h1 class="font-medium text-6xl mb-4 text-yellow-50 inline tracking-wide">
-                        with<span class="text-gray-800 font-bold">Remi.
+                        with <span class="text-gray-800 font-bold">Remi.
                     </h1>
                     <p class="text-2xl font-medium mb-6 text-gray-800">
                         Improve your mental health and unlock new ideas by documenting how you dream.
@@ -54,33 +54,14 @@
         @auth
 
             {{-- Logic to be added to show guest section after a post has aleady been submitted that day --}}
-
-            <div class="w-full inset-x-0 leading-4 py-10">
-                <x-form.create-post-form>
-                    What did you dream about last night?
-                </x-form.create-post-form>
-            </div>
+                {{-- <div class="w-full inset-x-0 leading-4 py-10">
+                    <x-form.create-post-form>
+                        What did you dream about last night?
+                    </x-form.create-post-form>
+                </div> --}}
+                <x-posts-grid :posts="$posts"/>
         @else
-            <div class="container w-full my-7 gap-10 mx-auto grid grid-cols-2 grid-rows-7">
-                <div class="col-span-1 col-start-1 row-span-2">
-                    <x-post-card/>
-                </div>
-                <div class="col-span-1 col-start-2 row-start-2 row-span-2">
-                    <x-post-card/>
-                </div>
-                <div class="col-span-1 col-start-1 row-start-3 row-span-2">
-                    <x-post-card/>
-                </div>
-                <div class="col-span-1 col-start-2 row-start-4 row-span-2">
-                    <x-post-card/>
-                </div>
-                <div class="col-span-1 col-start-1 row-start-5 row-span-2">
-                    <x-post-card/>
-                </div>
-                <div class="col-span-1 col-start-2 row-start-6 row-span-2">
-                    <x-post-card/>
-                </div>
-            </div>
+            <x-posts-grid :posts="$posts"/>
         @endauth
     </div>
 
