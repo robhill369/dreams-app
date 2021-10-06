@@ -26,6 +26,8 @@ Route::get('/posts', [PostController::class, 'index'])
         ->name('posts');     
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
+
+// Upon clicking on post's author's username...
 // Route::get('/{post:username}', [MemberController::class, 'show'])
 //         ->middleware('auth');
 

@@ -15,12 +15,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        // return Post::where('user_id', Auth::id())->get;
-        
-        return view('posts',[
-            'posts' => Post::all()]);
+        if (Auth::user()){
+            return view('posts',[
+                'posts' => Post::latest()->orderBy('created_at')->paginate(5)
+            ]);
+        }else{
+            return view('posts',[
+                'posts' => Post::latest()->orderBy('created_at')->limit(3)->get()
+            ]);
+        }
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -51,9 +55,17 @@ class PostController extends Controller
     public function show(Post $post)
     // need to pass in an $id
     {
-        return view('post',[
-            'post' => $post
-        ]);
+        if (Auth::user()){
+            // apply simple pagination ('next', 'previous'), for easy reading of requested posts).
+            return view('post',[
+                'post' => $post
+            ]);
+        }else{
+            return view('post',[
+                'post' => $post
+            ]);
+        }
+       
     }
 
     /**

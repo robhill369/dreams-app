@@ -3,11 +3,12 @@
     <div class="bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 h-full">
         <div class="container my-7 mx-auto w-full px-40 grid grid-cols-1 gap-6 justify-items-center">
         @auth
-            @foreach ($posts->sortByDesc('created_at') as $post)
+            @foreach ($posts as $post)
             <x-post-listing :post="$post" :user="$post->author" />
             @endforeach
+            {{ $posts->links() }}
         @else
-            @foreach ($posts->sortByDesc('created_at')->take(3) as $post)
+            @foreach ($posts as $post)
             <x-post-listing :post="$post" :user="$post->author" />
             @endforeach
         <div>

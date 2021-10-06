@@ -26,7 +26,7 @@
                         <li class="mt-1">Process emotions more easily.</li>
                 </ul>
                 @guest
-                <x-primary-button class="mt-4 float-right">
+                <x-primary-button class="mt-4 float-right" id="dreamsearch">
                     <x-slot name='href'>/register</x-slot>
                         Start Your Journal
                     </x-primary-button> 
